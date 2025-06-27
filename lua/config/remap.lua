@@ -98,3 +98,6 @@ map('n', 'Q', "<nop>", opts)
 
 -- Select all
 map('n', '<leader>sa', [[ggVG]], opts)
+
+-- Visual mode
+map('n', '<leader>s', [[v]], opts)
