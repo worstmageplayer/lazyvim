@@ -57,7 +57,7 @@ vim.api.nvim_create_user_command("GitACP", function()
 end, { desc = "Git add . commit and push" })
 
 -- File Explorer
-vim.keymap.set("n", "<leader><return>", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
 
 -- Custom keymap helper
 local map = vim.api.nvim_set_keymap
