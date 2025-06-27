@@ -12,6 +12,7 @@ vim.o.showtabline = 0
 vim.o.cursorline = true
 
 -- === Tabs & Indentation ===
+vim.o.signcolumn = 'yes'
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
