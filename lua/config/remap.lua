@@ -100,4 +100,4 @@ map("n", "<leader>P", '"+P', opts)
 map('n', 'Q', "<nop>", opts)
 
 -- Select all
-map('n', '<leader>a', [[ggVG]], opts)
+map('n', '<leader>sa', [[ggVG]], opts)
