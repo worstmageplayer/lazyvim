@@ -78,4 +78,3 @@ map('n', 'Q', "<nop>", opts)
 
 -- Select all
 map('n', '<leader>a', [[ggVG]], opts)
-
