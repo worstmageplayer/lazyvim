@@ -32,7 +32,16 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
--- === Commands === 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    local save = vim.fn.winsaveview()
+    vim.cmd([[%s/\s\+$//e]])
+    vim.fn.winrestview(save)
+  end,
+})
+
+-- === Commands ===
 vim.api.nvim_create_user_command("GitACP", function()
   vim.ui.input({ prompt = "Commit message: " }, function(msg)
     if not msg or msg == "" then
@@ -44,7 +53,7 @@ vim.api.nvim_create_user_command("GitACP", function()
     vim.cmd('!git commit -m "' .. msg:gsub('"', '\\"') .. '"')
     vim.cmd("!git push")
   end)
-end, { desc = "Git add . && commit && push" })
+end, { desc = "Git add . commit and push" })
 
 -- File Explorer
 vim.keymap.set("n", "<leader>pp", vim.cmd.Ex)
