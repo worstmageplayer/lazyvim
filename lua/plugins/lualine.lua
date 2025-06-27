@@ -1,3 +1,13 @@
+local better_filename = function()
+    local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
+    local file = vim.fn.expand('%:t')
+    if file == '' then
+        return cwd
+    else
+        return file
+    end
+end
+
 local custom_theme = {
     normal = {
         a = { fg = '#16161d', bg = '#89b4fa', gui = 'bold' },
@@ -63,15 +73,19 @@ return {
             sections = {
                 lualine_a = {'mode'},
                 lualine_b = {'branch', 'diff', 'diagnostics'},
-                lualine_c = {'filename'},
-                lualine_x = {'encoding', 'fileformat', 'filetype'},
+                lualine_c = { better_filename },
+                lualine_x = {},
                 lualine_y = {'progress'},
-                lualine_z = {'location'}
+                lualine_z = {
+                    function()
+                        return os.date('%H:%M')
+                    end
+                }
             },
             inactive_sections = {
                 lualine_a = {},
                 lualine_b = {},
-                lualine_c = {'filename'},
+                lualine_c = { better_filename },
                 lualine_x = {'location'},
                 lualine_y = {},
                 lualine_z = {}
