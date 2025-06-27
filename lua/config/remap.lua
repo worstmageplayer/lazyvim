@@ -57,7 +57,7 @@ vim.api.nvim_create_user_command("GitACP", function()
 end, { desc = "Git add . commit and push" })
 
 -- File Explorer
-vim.keymap.set("n", "<leader>pp", vim.cmd.Ex)
+vim.keymap.set("n", "<leader><return>", vim.cmd.Ex)
 
 -- Custom keymap helper
 local map = vim.api.nvim_set_keymap
@@ -104,3 +104,9 @@ map('n', '<leader>sw', [[viw]], opts)
 
 -- Visual mode
 map('n', '<leader>s', [[v]], opts)
+
+-- === Telescope ===
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "Find Files" })
+vim.keymap.set('n', '<C-f>', builtin.find_files, { desc = "Find Files" })
+vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = "Git Files" })
