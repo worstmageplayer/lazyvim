@@ -75,10 +75,6 @@ map('n', '<C-d>', [[<C-d><CR>zz]], opts)
 map('n', 'n', [[nzzzv]], opts)
 map('n', 'N', [[Nzzzv]], opts)
 
--- Better vertical movement in visual mode (handle wrapped lines)
-map('v', 'j', 'gj', opts)
-map('v', 'k', 'gk', opts)
-
 -- Paste over selection without yanking it
 map('v', 'p', [["_dP]], opts)
 
