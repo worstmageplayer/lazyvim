@@ -99,5 +99,8 @@ map('n', 'Q', "<nop>", opts)
 -- Select all
 map('n', '<leader>sa', [[ggVG]], opts)
 
+-- Select word
+map('n', '<leader>sw', [[viw]], opts)
+
 -- Visual mode
 map('n', '<leader>s', [[v]], opts)
