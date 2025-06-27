@@ -13,7 +13,7 @@ return {
             custom_highlights = function(colors)
                 return {
                     LineNr = { fg = "#fffff0" },
-                    CursorLineNr = { fg = "#ffffff" },
+                    CursorLineNr = { fg = "#fffff0" },
                     VertSplit = { fg = "#fffff0" },
                 }
             end,
