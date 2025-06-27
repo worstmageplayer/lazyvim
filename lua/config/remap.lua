@@ -107,6 +107,6 @@ map('n', '<leader>s', [[v]], opts)
 
 -- === Telescope ===
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = "Find Files" })
+vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Find Files" })
 vim.keymap.set('n', '<C-f>', builtin.find_files, { desc = "Find Files" })
 vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = "Git Files" })
