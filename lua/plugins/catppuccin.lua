@@ -15,6 +15,7 @@ return {
                     LineNr = { fg = "#fffff0" },
                     CursorLineNr = { fg = "#fffff0" },
                     VertSplit = { fg = "#fffff0" },
+                    MsgArea = { bg = "#16161d" },
                 }
             end,
         })
