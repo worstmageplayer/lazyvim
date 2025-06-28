@@ -58,7 +58,7 @@ end, { desc = "Git add . commit and push" })
 
 -- Custom keymap helper
 local map = vim.keymap.set
-local opts = { noremap = true, silent = false }
+local opts = { noremap = true, silent = true }
 
 -- File Explorer
 map("n", "<leader>q", vim.cmd.Ex)
@@ -106,4 +106,25 @@ map('n', '<leader>fl', builtin.find_files, opts)
 map('n', '<leader>fg', builtin.git_files, opts)
 map('n', '<leader>fs', function()
     builtin.grep_string({ search = vim.fn.input('Grep > ') })
+end, opts)
+
+-- === Harpoon2 ===
+local harpoon = require('harpoon')
+map('n', '<leader>h', function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, opts)
+map('n', '<leader>hl', function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+end, opts)
+map('n', '<leader>ha', function()
+    harpoon:list():add()
+end, opts)
+map('n', '<leader>j', function()
+    harpoon:list():select(1)
+end, opts)
+map('n', '<leader>k', function()
+    harpoon:list():select(2)
+end, opts)
+map('n', '<leader>l', function()
+    harpoon:list():select(3)
 end, opts)
