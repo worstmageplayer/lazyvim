@@ -56,12 +56,12 @@ vim.api.nvim_create_user_command("GitACP", function()
   end)
 end, { desc = "Git add . commit and push" })
 
--- File Explorer
-vim.keymap.set("n", "<leader>q", vim.cmd.Ex)
-
 -- Custom keymap helper
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = false }
+
+-- File Explorer
+map("n", "<leader>q", vim.cmd.Ex)
 
 -- Search next/prev opening brace and center the view
 map('n', '<A-[>', [[/\v\{<CR>zz]], opts)
@@ -107,6 +107,6 @@ map('n', '<leader>s', [[v]], opts)
 
 -- === Telescope ===
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>f', builtin.find_files, { desc = "Find Files" })
-vim.keymap.set('n', '<C-f>', builtin.find_files, { desc = "Find Files" })
-vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = "Git Files" })
+map('n', '<leader>f', builtin.find_files, { desc = "Find Files" })
+map('n', '<C-f>', builtin.find_files, { desc = "Find Files" })
+map('n', '<C-p>', builtin.git_files, { desc = "Git Files" })
