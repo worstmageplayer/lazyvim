@@ -63,6 +63,9 @@ local opts = { noremap = true, silent = true }
 -- File Explorer
 map("n", "<leader>q", vim.cmd.Ex)
 
+-- Write and quit
+map("n", "<leader>wq", '<cmd>wq<CR>')
+
 -- Search next/prev opening brace and center the view
 map('n', '<A-[>', [[/\v\{<CR>zz]], opts)
 map('n', '<A-]>', [[?\v\{<CR>zz]], opts)
@@ -110,21 +113,9 @@ end, opts)
 
 -- === Harpoon2 ===
 local harpoon = require('harpoon')
-map('n', '<leader>h', function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-end, opts)
-map('n', '<leader>hl', function()
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-end, opts)
-map('n', '<leader>ha', function()
-    harpoon:list():add()
-end, opts)
-map('n', '<leader>j', function()
-    harpoon:list():select(1)
-end, opts)
-map('n', '<leader>k', function()
-    harpoon:list():select(2)
-end, opts)
-map('n', '<leader>l', function()
-    harpoon:list():select(3)
-end, opts)
+map('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts)
+map('n', '<leader>hl', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts)
+map('n', '<leader>ha', function() harpoon:list():add() end, opts)
+map('n', '<leader>j', function() harpoon:list():select(1) end, opts)
+map('n', '<leader>k', function() harpoon:list():select(2) end, opts)
+map('n', '<leader>l', function() harpoon:list():select(3) end, opts)
