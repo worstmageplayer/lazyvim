@@ -85,25 +85,19 @@ map('v', 'K', ":m '<-2<CR>gv=gv", opts)
 -- Join lines without moving the cursor
 map('n', 'J', "mzJ`z", opts)
 
--- Yank to system clipboard
-map('n', '<leader>y', "\"+y", opts)
-map('v', '<leader>y', "\"+y", opts)
-
--- Paste from system clipboard
+-- System clipboard
+map('n', '<leader>y', '"+y', opts)
+map('v', '<leader>y', '"+y', opts)
 map("n", "<leader>p", '"+p', opts)
 map("n", "<leader>P", '"+P', opts)
 
 -- Disable accidental Q (Ex mode)
 map('n', 'Q', "<nop>", opts)
 
--- Select all
-map('n', '<leader>sa', [[ggVG]], opts)
-
--- Select word
-map('n', '<leader>sw', [[viw]], opts)
-
--- Visual mode
+-- Selection
 map('n', '<leader>s', [[v]], opts)
+map('n', '<leader>sa', [[ggVG]], opts)
+map('n', '<leader>sw', [[viw]], opts)
 
 -- === Telescope ===
 local builtin = require('telescope.builtin')
