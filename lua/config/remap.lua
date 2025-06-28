@@ -107,6 +107,5 @@ map('n', '<leader>s', [[v]], opts)
 
 -- === Telescope ===
 local builtin = require('telescope.builtin')
-map('n', '<leader>f', builtin.find_files, { desc = "Find Files" })
-map('n', '<C-f>', builtin.find_files, { desc = "Find Files" })
-map('n', '<C-p>', builtin.git_files, { desc = "Git Files" })
+map('n', '<leader>fl', builtin.find_files, opts)
+map('n', '<leader>fg', builtin.git_files, opts)
