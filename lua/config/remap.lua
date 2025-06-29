@@ -22,6 +22,7 @@ vim.api.nvim_create_user_command("GitACP", function()
       return
     end
 
+    print("\n")
     vim.cmd("!git add .")
     vim.cmd('!git commit -m "' .. msg:gsub('"', '\\"') .. '"')
     vim.cmd("!git push")
