@@ -4,21 +4,20 @@ return {
     priority = 1000,
     config = function()
         require("catppuccin").setup({
-            flavour = "mocha",
+            flavour = "latte",
             color_overrides = {
                 mocha = {
                     base = "#16161d",
                     text = "#f8f8ff",
                 },
                 latte = {
-                    base = "#fff5ee",
+                    base = "#fffff0",
                     text = "#16161d",
                 },
             },
             highlight_overrides = {
                 mocha = function(colors)
                     return {
-                        LineNr = { fg = "#fffff0" },
                         CursorLineNr = { fg = "#ebefff" },
                         LineNr = { fg = "#cdd6f4" },
                         VertSplit = { fg = "#fffff0" },
@@ -29,7 +28,6 @@ return {
                     return {
                         LineNr = { fg = "#7287fd" },
                         CursorLineNr = { fg = "#7827fd" },
-                        LineNr = { bg = "#e1d7cd" },
                         VertSplit = { fg = "#7827fd" },
                         MsgArea = { bg = "#fff5ee" },
                     }
