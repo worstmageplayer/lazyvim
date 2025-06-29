@@ -74,6 +74,18 @@ map('n', '<leader>v', [[v]], opts)
 map('n', '<leader>va', [[ggVG]], opts)
 map('n', '<leader>vw', [[viw]], opts)
 
+-- String
+map("v", "<leader>idq", function()
+    vim.cmd("normal! <Esc>gv")
+    vim.cmd("normal! `<i\"")
+    vim.cmd("normal! `>a\"")
+end, opts)
+map("v", "<leader>isq", function()
+    vim.cmd("normal! <Esc>gv")
+    vim.cmd("normal! `<i'")
+    vim.cmd("normal! `>a'")
+end, opts)
+
 -- === Telescope ===
 local builtin = require('telescope.builtin')
 map('n', '<leader>f', builtin.find_files, opts)
