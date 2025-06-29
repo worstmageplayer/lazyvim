@@ -6,19 +6,34 @@ return {
         require("catppuccin").setup({
             flavour = "mocha",
             color_overrides = {
-                all = {
+                mocha = {
                     base = "#16161d",
                     text = "#f8f8ff",
-                }
+                },
+                latte = {
+                    base = "#fff5ee",
+                    text = "#16161d",
+                },
             },
-            custom_highlights = function(colors)
-                return {
-                    LineNr = { fg = "#fffff0" },
-                    CursorLineNr = { fg = "#fffff0" },
-                    VertSplit = { fg = "#fffff0" },
-                    MsgArea = { bg = "#16161d" },
-                }
-            end,
+            highlight_overrides = {
+                mocha = function(colors)
+                    return {
+                        LineNr = { fg = "#fffff0" },
+                        CursorLineNr = { fg = "#fffff0" },
+                        VertSplit = { fg = "#fffff0" },
+                        MsgArea = { bg = "#16161d" },
+                    }
+                end,
+                latte = function(colors)
+                    return {
+                        LineNr = { fg = "#7287fd" },
+                        CursorLineNr = { fg = "#7827fd" },
+                        CursorLine = { bg = "#e1d7cd" },
+                        VertSplit = { fg = "#7827fd" },
+                        MsgArea = { bg = "#fff5ee" },
+                    }
+                end,
+            },
             integrations = {
                 aerial = true,
                 alpha = true,
