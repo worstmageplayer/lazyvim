@@ -18,7 +18,35 @@ vim.opt.rtp:prepend(lazypath)
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
+
+-- Set <leader> key
 vim.g.mapleader = " "
+
+-- === UI Settings ===
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.scrolloff = 8
+vim.opt.wrap = false
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+vim.opt.showtabline = 0
+vim.opt.cursorline = true
+
+-- === Tabs & Indentation ===
+vim.opt.signcolumn = 'yes'
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.list = true
+vim.opt.listchars = {
+    space = "·",
+    tab = "»·",
+    trail = "·",
+    extends = "→",
+    precedes = "←",
+}
+
 
 -- Setup lazy.nvim
 require("lazy").setup({
