@@ -19,8 +19,8 @@ return {
                 mocha = function(colors)
                     return {
                         LineNr = { fg = "#fffff0" },
-                        CursorLineNr = { fg = "#f0f0ff" },
-                        LineNr = { fg = "#c8c8d7" },
+                        CursorLineNr = { fg = "#ebefff" },
+                        LineNr = { fg = "#cdd6f4" },
                         VertSplit = { fg = "#fffff0" },
                         MsgArea = { bg = "#16161d" },
                     }
