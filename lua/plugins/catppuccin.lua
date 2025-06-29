@@ -29,7 +29,7 @@ return {
                         LineNr = { fg = "#7287fd" },
                         CursorLineNr = { fg = "#7827fd" },
                         VertSplit = { fg = "#7827fd" },
-                        MsgArea = { bg = "#fff5ee" },
+                        MsgArea = { bg = "#fffff0" },
                     }
                 end,
             },
