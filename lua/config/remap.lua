@@ -98,9 +98,9 @@ map("n", "<leader>P", '"+P', opts)
 map('n', 'Q', "<nop>", opts)
 
 -- Selection
-map('n', '<leader>s', [[v]], opts)
-map('n', '<leader>sa', [[ggVG]], opts)
-map('n', '<leader>sw', [[viw]], opts)
+map('n', '<leader>v', [[v]], opts)
+map('n', '<leader>va', [[ggVG]], opts)
+map('n', '<leader>vw', [[viw]], opts)
 
 -- === Telescope ===
 local builtin = require('telescope.builtin')
