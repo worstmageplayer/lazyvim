@@ -20,6 +20,7 @@ return {
                     return {
                         LineNr = { fg = "#fffff0" },
                         CursorLineNr = { fg = "#fffff0" },
+                        LineNr = { fg = "#c7c7d6" },
                         VertSplit = { fg = "#fffff0" },
                         MsgArea = { bg = "#16161d" },
                     }
@@ -28,7 +29,7 @@ return {
                     return {
                         LineNr = { fg = "#7287fd" },
                         CursorLineNr = { fg = "#7827fd" },
-                        CursorLine = { bg = "#e1d7cd" },
+                        LineNr = { bg = "#e1d7cd" },
                         VertSplit = { fg = "#7827fd" },
                         MsgArea = { bg = "#fff5ee" },
                     }
