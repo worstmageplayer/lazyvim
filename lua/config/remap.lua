@@ -1,31 +1,31 @@
 -- === Autocommands ===
 vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank { timeout = 50 }
-  end,
+    callback = function()
+        vim.highlight.on_yank { timeout = 50 }
+    end,
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function()
-    local save = vim.fn.winsaveview()
-    vim.cmd([[%s/\s\+$//e]])
-    vim.fn.winrestview(save)
-  end,
+    pattern = "*",
+    callback = function()
+        local save = vim.fn.winsaveview()
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.winrestview(save)
+    end,
 })
 
 -- === Commands ===
 vim.api.nvim_create_user_command("GitACP", function()
-  vim.ui.input({ prompt = "Commit message: " }, function(msg)
-    if not msg or msg == "" then
-      vim.notify("Aborted: no commit message", vim.log.levels.WARN)
-      return
-    end
+    vim.ui.input({ prompt = "Commit message: " }, function(msg)
+        if not msg or msg == "" then
+            vim.notify("Aborted: no commit message", vim.log.levels.WARN)
+            return
+        end
 
-    vim.cmd("!git add .")
-    vim.cmd('!git commit -m "' .. msg:gsub('"', '\\"') .. '"')
-    vim.cmd("!git push")
-  end)
+        vim.cmd("!git add .")
+        vim.cmd('!git commit -m "' .. msg:gsub('"', '\\"') .. '"')
+        vim.cmd("!git push")
+    end)
 end, { desc = "Git add . commit and push" })
 
 -- Custom keymap helper
@@ -109,35 +109,35 @@ map('n', '<leader>k', function() harpoon:list():select(2) end, opts("Harpoon Sel
 map('n', '<leader>l', function() harpoon:list():select(3) end, opts("Harpoon Select 3"))
 
 vim.keymap.set("n", "<leader>", function()
-  local maps = vim.api.nvim_get_keymap("")
-  local results = {}
+    local maps = vim.api.nvim_get_keymap("")
+    local results = {}
 
-  for _, map in ipairs(maps) do
-    if map.lhs:find("^" .. vim.g.mapleader) then
-      local desc = map.desc or ""
-      local lhs = map.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
-      table.insert(results, string.format("%-5s %-15s %s", map.mode, lhs, desc))
+    for _, map in ipairs(maps) do
+        if map.lhs:find("^" .. vim.g.mapleader) then
+            local desc = map.desc or ""
+            local lhs = map.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
+            table.insert(results, string.format("%-5s %-15s %s", map.mode, lhs, desc))
+        end
     end
-  end
 
-  table.sort(results)
+    table.sort(results)
 
-  local width = math.max(unpack(vim.tbl_map(function(line) return #line end, results))) + 4
-  local height = #results + 2
+    local width = math.max(unpack(vim.tbl_map(function(line) return #line end, results))) + 4
+    local height = #results + 2
 
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, results)
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, results)
 
-  local win = vim.api.nvim_open_win(buf, true, {
-    title = "Leader Mappings",
-    title_pos = "center",
-    relative = "editor",
-    width = width,
-    height = height,
-    row = (vim.o.lines - height) / 2,
-    col = (vim.o.columns - width) / 2,
-    border = "rounded",
-    style = "minimal",
-  })
+    local win = vim.api.nvim_open_win(buf, true, {
+        title = "Leader Mappings",
+        title_pos = "center",
+        relative = "editor",
+        width = width,
+        height = height,
+        row = (vim.o.lines - height) / 2,
+        col = (vim.o.columns - width) / 2,
+        border = "rounded",
+        style = "minimal",
+    })
 
 end, opts("Show <leader> mappings"))
