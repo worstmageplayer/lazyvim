@@ -12,6 +12,6 @@ return {
         }
     }
 
-    require('telescope').load_extensions('fzf')
+    require('telescope').load_extension('fzf')
   end,
 }
