@@ -90,9 +90,13 @@ end, opts)
 local builtin = require('telescope.builtin')
 map('n', '<leader>f', builtin.find_files, opts)
 map('n', '<leader>fl', builtin.find_files, opts)
+map('n', '<leader>fd', builtin.diagnostics, opts)
 map('n', '<leader>fg', builtin.git_files, opts)
 map('n', '<leader>fs', function()
-    builtin.grep_string({ search = vim.fn.input('Grep > ') })
+    builtin.grep_string({ search = vim.fn.input('Grep: ') })
+end, opts)
+map('n', '<leader>fc', function()
+    builtin.find_files{ cwd = vim.fn.stdpath("config")}
 end, opts)
 
 -- === Harpoon2 ===
