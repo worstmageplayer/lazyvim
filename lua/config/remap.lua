@@ -118,7 +118,6 @@ map("n", "K", function()
 
     vim.api.nvim_win_set_cursor(0, cursor_pos)
 
-    -- Close with <Esc>
     vim.keymap.set("n", "<Esc>", function()
         vim.api.nvim_win_close(float_win, true)
     end, { buffer = float_buf, nowait = true, silent = true })
