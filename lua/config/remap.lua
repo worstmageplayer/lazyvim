@@ -78,6 +78,7 @@ map("n", "<leader>", function()
 
 end, opts("Show <leader> mappings"))
 
+-- Better help
 map("n", "K", function()
     local word = vim.fn.expand("<cword>")
 
