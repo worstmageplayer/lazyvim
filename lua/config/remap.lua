@@ -99,14 +99,14 @@ map('n', 'n', [[nzzzv]], opts(""))
 map('n', 'N', [[Nzzzv]], opts(""))
 
 -- Paste over selection without yanking it
-map('v', 'p', [["_dP]], opts(""))
+map('v', 'p', [["_dP]], opts("Paste over selection without yanking it"))
 
 -- Move selected lines up/down in visual mode
-map('v', 'J', ":m '>+1<CR>gv=gv", opts(""))
-map('v', 'K', ":m '<-2<CR>gv=gv", opts(""))
+map('v', 'J', ":m '>+1<CR>gv=gv", opts("Move selected lines up"))
+map('v', 'K', ":m '<-2<CR>gv=gv", opts("Move selected lines down"))
 
 -- Join lines without moving the cursor
-map('n', 'J', "mzJ`z", opts(""))
+map('n', 'J', "mzJ`z", opts("Join lines without moving the cursor"))
 
 -- System clipboard
 map('n', '<leader>y', '"+y', opts("Yank to System Clipboard"))
