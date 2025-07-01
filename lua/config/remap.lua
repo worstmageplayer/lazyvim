@@ -88,18 +88,16 @@ map("n", "K", function()
         return
     end
 
-    local help_win = vim.api.nvim_get_current_win()
     local help_buf = vim.api.nvim_get_current_buf()
-
     local help_lines = vim.api.nvim_buf_get_lines(help_buf, 0, -1, false)
     local cursor_pos = vim.api.nvim_win_get_cursor(0)
 
-    vim.api.nvim_win_close(help_win, true)
+    vim.cmd("q")
 
     local float_buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(float_buf, 0, -1, false, help_lines)
-    vim.api.nvim_buf_set_option(float_buf, "filetype", "help")
-    vim.api.nvim_buf_set_option(float_buf, "modifiable", false)
+    vim.bo[float_buf].filetype = "help"
+    vim.bo[float_buf].modifiable = false
 
     local width = math.floor(vim.o.columns * 0.6)
     local height = math.floor(vim.o.lines * 0.8)
