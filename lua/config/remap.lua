@@ -173,7 +173,6 @@ map("n", "<leader>rw", function()
         zindex = 150,
     })
 
-    -- Switch back to the original window and highlight the word
     vim.api.nvim_set_current_win(target_win)
     local pattern = "\\V\\<" .. word .. "\\>"
     local match_id = vim.fn.matchadd("Search", pattern)
