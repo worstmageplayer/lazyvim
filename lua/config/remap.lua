@@ -93,9 +93,11 @@ map("n", "<leader>rs", function()
 end, opts("Replace search"))
 map("n", "<leader>rw", function()
     local word = vim.fn.expand("<cword>")
-    word = "\\<" .. word .. "\\>"
+
     vim.ui.input({ prompt = "Replace '" .. word .. "' with: " }, function(replace)
         if not replace or replace == "" then return end
+
+        word = "\\<" .. word .. "\\>"
 
         local cmd = string.format("%%s/%s/%s/gc", word, replace)
         vim.cmd(cmd)
