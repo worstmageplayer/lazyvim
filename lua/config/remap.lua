@@ -98,7 +98,7 @@ end, opts("Telescope find config files"))
 local harpoon = require('harpoon')
 map('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts("Harpoon quick menu"))
 map('n', '<leader>hl', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts("Harpoon quick menu"))
-map('n', '<leader>ha', function() harpoon:list():add() end, opts("Harpoon Adds current file"))
+map('n', '<leader>ha', function() harpoon:list():add() end, opts("Harpoon add current file"))
 map('n', '<leader>j', function() harpoon:list():select(1) end, opts("Harpoon Select 1"))
 map('n', '<leader>k', function() harpoon:list():select(2) end, opts("Harpoon Select 2"))
 map('n', '<leader>l', function() harpoon:list():select(3) end, opts("Harpoon Select 3"))
@@ -106,22 +106,27 @@ map('n', '<leader>l', function() harpoon:list():select(3) end, opts("Harpoon Sel
 vim.keymap.set("n", "<leader>", function()
     local maps = vim.api.nvim_get_keymap("")
     local results = {}
+    local raw_keys = {}
+    local modes = {}
 
     for _, map in ipairs(maps) do
         if map.lhs:find("^" .. vim.g.mapleader) then
             local desc = map.desc or ""
             local lhs = map.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
             table.insert(results, string.format("%-5s %-15s %s", map.mode, lhs, desc))
+            table.insert(raw_keys, map.lhs)
+            table.insert(modes, map.mode)
         end
     end
 
-    table.sort(results)
+     table.sort(results)
 
     local width = math.max(unpack(vim.tbl_map(function(line) return #line end, results))) + 4
-    local height = #results + 2
+    local height = #results
 
     local buf = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, results)
+    vim.api.nvim_buf_set_option(buf, "modifiable", false)
 
     local win = vim.api.nvim_open_win(buf, true, {
         title = "Leader Mappings",
@@ -134,5 +139,9 @@ vim.keymap.set("n", "<leader>", function()
         border = "rounded",
         style = "minimal",
     })
+
+    vim.keymap.set("n", "<Esc>", function()
+        vim.api.nvim_win_close(win, true)
+    end, { silent = true, buffer = buf })
 
 end, opts("Show <leader> mappings"))
