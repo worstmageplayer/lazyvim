@@ -78,6 +78,53 @@ map("n", "<leader>", function()
 
 end, opts("Show <leader> mappings"))
 
+map("n", "K", function()
+    local word = vim.fn.expand("<cword>")
+
+    local ok = pcall(vim.cmd, "help " .. word)
+    if not ok then
+        vim.notify("No help found for: " .. word, vim.log.levels.WARN)
+        return
+    end
+
+    local help_win = vim.api.nvim_get_current_win()
+    local help_buf = vim.api.nvim_get_current_buf()
+
+    local help_lines = vim.api.nvim_buf_get_lines(help_buf, 0, -1, false)
+    local cursor_pos = vim.api.nvim_win_get_cursor(0)
+
+    vim.api.nvim_win_close(help_win, true)
+
+    local float_buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(float_buf, 0, -1, false, help_lines)
+    vim.api.nvim_buf_set_option(float_buf, "filetype", "help")
+    vim.api.nvim_buf_set_option(float_buf, "modifiable", false)
+
+    local width = math.floor(vim.o.columns * 0.6)
+    local height = math.floor(vim.o.lines * 0.6)
+    local row = math.floor((vim.o.lines - height) / 2)
+    local col = math.floor((vim.o.columns - width) / 2)
+
+    local float_win = vim.api.nvim_open_win(float_buf, true, {
+        relative = "editor",
+        width = width,
+        height = height,
+        row = row,
+        col = col,
+        style = "minimal",
+        border = "rounded",
+        title = "Help: " .. word,
+        title_pos = "center",
+    })
+
+    vim.api.nvim_win_set_cursor(0, cursor_pos)
+
+    -- Close with <Esc>
+    vim.keymap.set("n", "<Esc>", function()
+        vim.api.nvim_win_close(float_win, true)
+    end, { buffer = float_buf, nowait = true, silent = true })
+end, opts("Floating help"))
+
 -- Refactor
 map("n", "<leader>rs", function()
     vim.ui.input({ prompt = "Search: " }, function(search)
