@@ -121,6 +121,17 @@ map("n", "K", function()
     vim.keymap.set("n", "<Esc>", function()
         vim.api.nvim_win_close(float_win, true)
     end, { buffer = float_buf, nowait = true, silent = true })
+
+    vim.api.nvim_create_autocmd("WinLeave", {
+        buffer = float_buf,
+        once = true,
+        callback = function()
+            if vim.api.nvim_win_is_valid(float_win) then
+                vim.api.nvim_win_close(float_win, true)
+            end
+        end,
+    })
+
 end, opts("Floating help"))
 
 -- Refactor
