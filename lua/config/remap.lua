@@ -50,9 +50,7 @@ map("n", "<leader>", function()
     end
 
     table.sort(results, function(a, b)
-        local descA = a:sub(21)
-        local descB = b:sub(21)
-        return descA < descB
+        return a:lower() < b:lower()
     end)
 
     local width = math.max(unpack(vim.tbl_map(function(line) return #line end, results))) + 4
@@ -79,6 +77,30 @@ map("n", "<leader>", function()
     end, { silent = true, buffer = buf })
 
 end, opts("Show <leader> mappings"))
+
+-- Refactor
+map("n", "<leader>rs", function()
+    vim.ui.input({ prompt = "Search: " }, function(search)
+        if not search or search == "" then return end
+
+        vim.ui.input({ prompt = "Replace: " }, function(replace)
+            if not replace then return end
+
+            local cmd = string.format("%%s/%s/%s/gc", search, replace)
+            vim.cmd(cmd)
+        end)
+    end)
+end, opts("Replace search"))
+map("n", "<leader>rw", function()
+    local word = vim.fn.expand("<cword>")
+    word = "\\<" .. word .. "\\>"
+    vim.ui.input({ prompt = "Replace '" .. word .. "' with: " }, function(replace)
+        if not replace or replace == "" then return end
+
+        local cmd = string.format("%%s/%s/%s/gc", word, replace)
+        vim.cmd(cmd)
+    end)
+end, opts("Replace word under cursor"))
 
 -- File Explorer
 map("n", "<leader>q", vim.cmd.Ex, opts(":Ex"))
