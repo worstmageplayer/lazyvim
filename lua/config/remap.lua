@@ -179,7 +179,12 @@ map("n", "<leader>rw", function()
 
     local function cleanup()
         vim.fn.prompt_setcallback(buf, function() end)
-        vim.api.nvim_win_close(win, true)
+        if vim.api.nvim_win_is_valid(win) then
+            vim.api.nvim_win_close(win, true)
+        end
+        if vim.api.nvim_buf_is_valid(buf) then
+            vim.api.nvim_buf_delete(buf, { force = true })
+        end
         vim.fn.matchdelete(match_id)
     end
 
