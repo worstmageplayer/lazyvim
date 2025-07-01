@@ -98,7 +98,6 @@ map("n", "<leader>rw", function()
         if not replace or replace == "" then return end
 
         word = "\\<" .. word .. "\\>"
-
         local cmd = string.format("%%s/%s/%s/gc", word, replace)
         vim.cmd(cmd)
     end)
