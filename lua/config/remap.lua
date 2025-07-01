@@ -149,15 +149,59 @@ map("n", "<leader>rs", function()
 end, opts("Replace search"))
 map("n", "<leader>rw", function()
     local word = vim.fn.expand("<cword>")
+    local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
 
-    vim.ui.input({ prompt = "Replace '" .. word .. "' with: " }, function(replace)
-        if not replace or replace == "" then return end
+    local target_win = vim.api.nvim_get_current_win()
 
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
+    vim.fn.prompt_setprompt(buf, "Replace '" .. word .. "' with: ")
+
+    local float_height = 1
+    local float_width = 40
+
+    local win = vim.api.nvim_open_win(buf, true, {
+        relative = "cursor",
+        width = float_width,
+        height = float_height,
+        row = -3,
+        col = - math.floor(float_width / 2),
+        style = "minimal",
+        border = "rounded",
+        title = "Replace",
+        title_pos = "center",
+        zindex = 150,
+    })
+
+    -- Switch back to the original window and highlight the word
+    vim.api.nvim_set_current_win(target_win)
+    local pattern = "\\V\\<" .. word .. "\\>"
+    local match_id = vim.fn.matchadd("Search", pattern)
+
+    local function cleanup()
+        vim.fn.prompt_setcallback(buf, function() end)
+        vim.api.nvim_win_close(win, true)
+        vim.fn.matchdelete(match_id)
+    end
+
+    vim.fn.prompt_setcallback(buf, function(replace)
+        if not replace or replace == "" then
+            cleanup()
+            return
+        end
+
+        cleanup()
         word = "\\<" .. word .. "\\>"
+        replace = replace:gsub("/", "\\/")
         local cmd = string.format("%%s/%s/%s/gc", word, replace)
         vim.cmd(cmd)
     end)
-end, opts("Replace word under cursor"))
+
+    vim.keymap.set("n", "<Esc>", cleanup, { buffer = buf, silent = true })
+
+    vim.api.nvim_set_current_win(win)
+    vim.cmd("startinsert")
+end, opts("Replace word with floating input"))
 
 -- File Explorer
 map("n", "<leader>q", vim.cmd.Ex, opts(":Ex"))
