@@ -101,7 +101,7 @@ map("n", "K", function()
     vim.api.nvim_buf_set_option(float_buf, "modifiable", false)
 
     local width = math.floor(vim.o.columns * 0.6)
-    local height = math.floor(vim.o.lines * 0.6)
+    local height = math.floor(vim.o.lines * 0.8)
     local row = math.floor((vim.o.lines - height) / 2)
     local col = math.floor((vim.o.columns - width) / 2)
 
