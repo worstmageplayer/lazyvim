@@ -75,11 +75,11 @@ map('n', '<leader>va', [[ggVG]], opts("Visual select all"))
 map('n', '<leader>vw', [[viw]], opts("Visual select word"))
 
 -- String
-map("v", "<leader>\"", "<Esc> `<i\"<Esc> `>a\"<Esc>", opts("Wrap selection in double quotes"))
-map("v", "<leader>\'", "<Esc> `<i\'<Esc> `>a\'<Esc>", opts("Wrap selection in single quotes"))
-map("v", "<leader>(", "<Esc> `<i(<Esc> `>a)<Esc>", opts("Wrap selection in parenthesis"))
-map("v", "<leader>{", "<Esc> `<i{<Esc> `>a}<Esc>", opts("Wrap selection in curly braces"))
-map("v", "<leader>[", "<Esc> `<i[<Esc> `>a]<Esc>", opts("Wrap selection in square brackets"))
+map("v", "<leader>\"", "<Esc> `>a\"<Esc> `<i\"<Esc>", opts("Wrap selection in double quotes"))
+map("v", "<leader>\'", "<Esc> `>a\'<Esc> `<i\'<Esc>", opts("Wrap selection in single quotes"))
+map("v", "<leader>(", "<Esc> `>a)<Esc> `<i(<Esc>", opts("Wrap selection in parenthesis"))
+map("v", "<leader>{", "<Esc> `>a}<Esc> `<i{<Esc>", opts("Wrap selection in curly braces"))
+map("v", "<leader>[", "<Esc> `>a]<Esc> `<i[<Esc>", opts("Wrap selection in square brackets"))
 
 -- === Telescope ===
 local builtin = require('telescope.builtin')
