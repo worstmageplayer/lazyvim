@@ -14,6 +14,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt_local.conceallevel = 2
+    end,
+})
+
 -- === Commands ===
 vim.api.nvim_create_user_command("GitACP", function()
     vim.ui.input({ prompt = "Commit message: " }, function(msg)
