@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- === lua ===
+-- === Lua ===
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "lua",
   callback = function()
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- === javascript ===
+-- === JavaScript ===
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "javascript", "typescript: "},
   callback = function()
