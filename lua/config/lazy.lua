@@ -40,11 +40,11 @@ vim.opt.softtabstop = 4
 vim.opt.expandtab = true
 vim.opt.list = true
 vim.opt.listchars = {
-    space = "·",
-    tab = "»·",
-    trail = "·",
-    extends = "→",
-    precedes = "←",
+  space = "·",
+  tab = "»·",
+  trail = "·",
+  extends = "→",
+  precedes = "←",
 }
 
 
