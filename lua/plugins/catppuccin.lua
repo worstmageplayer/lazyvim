@@ -22,6 +22,9 @@ return {
                         LineNr = { fg = "#cdd6f4" },
                         VertSplit = { fg = "#fffff0" },
                         MsgArea = { bg = "#16161d" },
+                        Visual = {
+                            style = {},
+                        }
                     }
                 end,
                 latte = function(colors)

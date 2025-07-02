@@ -156,7 +156,7 @@ map("n", "<leader>rs", function()
 end, opts("Replace search"))
 map("n", "<leader>rw", function()
     local word = vim.fn.expand("<cword>")
-    local cursor_row, cursor_col = unpack(vim.api.nvim_win_get_cursor(0))
+    if not word or word == "" then return end
 
     local target_win = vim.api.nvim_get_current_win()
 
