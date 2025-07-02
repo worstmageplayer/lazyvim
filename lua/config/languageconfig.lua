@@ -2,6 +2,8 @@
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
+    vim.opt_local.conceallevel = 2
+
     vim.keymap.set("v", "<leader>b", "<Esc> `>a**<Esc> `<i**<Esc>", { buffer = true })
     vim.keymap.set("v", "<leader>i", "<Esc> `>a*<Esc> `<i*<Esc>", { buffer = true })
     vim.keymap.set("v", "<leader>h1", "<Esc> `<i# <Esc>", { buffer = true })
