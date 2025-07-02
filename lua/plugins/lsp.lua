@@ -18,5 +18,4 @@ return {
       lspconfig[server].setup(config)
     end
   end
-
 }
