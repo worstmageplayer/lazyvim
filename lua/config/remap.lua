@@ -255,6 +255,28 @@ map('n', 'Q', "<nop>", opts(""))
 map('n', '<leader>v', [[v]], opts("Visual mode"))
 map('n', '<leader>va', [[ggVG]], opts("Visual select all"))
 map('n', '<leader>vw', [[viw]], opts("Visual select word"))
+map('n', '<leader>vf', function ()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+
+  local node = ts_utils.get_node_at_cursor()
+  if not node then return end
+
+  while node do
+    local type = node:type()
+    if type:find("function") or type:find("method") then
+      break
+    end
+    node = node:parent()
+  end
+
+  if not node then return end
+
+  local start_row, start_col, end_row, end_col = node:range()
+
+  vim.api.nvim_win_set_cursor(0, { start_row + 1, start_col })
+  vim.cmd("normal! v")
+  vim.api.nvim_win_set_cursor(0, { end_row + 1, end_col })
+end, opts("Visual select function"))
 
 -- Text Surround
 map("v", "<leader>\"", "<Esc> `>a\"<Esc> `<i\"<Esc>", opts("Surround selection in double quotes"))
