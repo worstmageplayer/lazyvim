@@ -65,7 +65,7 @@ map("n", "<leader>", function()
 
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, results)
-  vim.api.nvim_buf_set_option(buf, "modifiable", false)
+  vim.api.nvim_set_option_value("buftype", "prompt", { buf = buf, scope = "local" })
 
   local win = vim.api.nvim_open_win(buf, true, {
     title = "Leader Mappings",
@@ -161,7 +161,7 @@ map("n", "<leader>rw", function()
   local target_win = vim.api.nvim_get_current_win()
 
   local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_option(buf, "buftype", "prompt")
+  vim.api.nvim_set_option_value("buftype", "prompt", { buf = buf, scope = "local" })
   vim.fn.prompt_setprompt(buf, "Replace '" .. word .. "' with: ")
 
   local float_height = 1
