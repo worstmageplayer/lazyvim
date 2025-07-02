@@ -81,6 +81,7 @@ map("n", "<leader>", function()
 
   vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_win_close(win, true)
+    vim.api.nvim_buf_delete(buf, { force = true })
   end, { silent = true, buffer = buf })
 
 end, opts("Show <leader> mappings"))
@@ -186,12 +187,8 @@ map("n", "<leader>rw", function()
 
   local function cleanup()
     vim.fn.prompt_setcallback(buf, function() end)
-    if vim.api.nvim_win_is_valid(win) then
-      vim.api.nvim_win_close(win, true)
-    end
-    if vim.api.nvim_buf_is_valid(buf) then
-      vim.api.nvim_buf_delete(buf, { force = true })
-    end
+    vim.api.nvim_win_close(win, true)
+    vim.api.nvim_buf_delete(buf, { force = true })
     vim.fn.matchdelete(match_id)
   end
 
