@@ -179,6 +179,11 @@ map("n", "<leader>rw", function()
   end)
 
   vim.keymap.set("n", "<esc>", cleanup, { buffer = buf, silent = true })
+  vim.api.nvim_create_autocmd("WinLeave", {
+    buffer = buf,
+    once = true,
+    callback = cleanup
+  })
 
   vim.api.nvim_set_current_win(win)
   vim.cmd("startinsert")
