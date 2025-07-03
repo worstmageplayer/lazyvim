@@ -96,8 +96,8 @@ map("n", "K", function()
 
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, help_lines)
-  vim.bo[buf].filetype = "help"
-  vim.bo[buf].modifiable = false
+  vim.api.nvim_set_option_value("filetype", "help", { buf = buf, scope = "local" })
+  vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
 
   local width = math.floor(vim.o.columns * 0.6)
   local height = math.floor(vim.o.lines * 0.8)
@@ -120,14 +120,20 @@ map("n", "K", function()
 
   vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_win_close(win, true)
+    vim.api.nvim_buf_delete(buf, { force = true })
   end, { buffer = buf, nowait = true, silent = true })
 
   vim.api.nvim_create_autocmd("WinLeave", {
     buffer = buf,
     once = true,
-    callback = function()
-      vim.api.nvim_win_close(win, true)
-    end,
+    callback = function ()
+      if vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_win_close(win, true)
+      end
+      if vim.api.nvim_buf_is_valid(buf) then
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
+    end
   })
 
 end, opts("Floating help"))
