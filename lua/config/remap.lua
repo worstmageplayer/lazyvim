@@ -79,7 +79,9 @@ end, opts("Show <leader> mappings"))
 map("n", "K", function()
   local word = vim.fn.expand("<cword>")
 
-  local ok = pcall(vim.cmd, "help " .. word)
+  local ok = pcall(function()
+    vim.cmd("help " .. word)
+  end)
   if not ok then
     vim.notify("No help found for: " .. word, vim.log.levels.WARN)
     return
