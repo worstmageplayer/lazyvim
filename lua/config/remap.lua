@@ -36,16 +36,12 @@ local opts = function(desc) return { desc = desc, noremap = true, silent = true 
 map("n", "<leader>", function()
   local maps = vim.api.nvim_get_keymap("")
   local results = {}
-  local raw_keys = {}
-  local modes = {}
 
   for _, map in ipairs(maps) do
     if map.lhs:find("^" .. vim.g.mapleader) then
       local desc = map.desc or ""
       local lhs = map.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
       table.insert(results, string.format("%-5s %-15s %s", map.mode, lhs, desc))
-      table.insert(raw_keys, map.lhs)
-      table.insert(modes, map.mode)
     end
   end
 
