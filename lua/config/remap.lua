@@ -187,7 +187,7 @@ map("n", "<leader>rw", function()
 
   vim.keymap.set("n", "<esc>", function()
     vim.api.nvim_win_close(win, true)
-  end, { buffer = buf, silent = true })
+  end, { buffer = buf, nowait = true, silent = true })
 
   vim.api.nvim_create_autocmd("WinLeave", {
     buffer = buf,
