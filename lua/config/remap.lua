@@ -139,15 +139,15 @@ map("n", "<leader>rw", function()
   vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
   vim.fn.prompt_setprompt(buf, "replace '" .. word .. "' with: ")
 
-  local float_height = 1
-  local float_width = 40
+  local height = 1
+  local width = 40
 
   local win = vim.api.nvim_open_win(buf, true, {
     relative = "cursor",
-    width = float_width,
-    height = float_height,
+    width = width,
+    height = height,
     row = -3,
-    col = - math.floor(float_width / 2),
+    col = - math.floor(width / 2),
     style = "minimal",
     border = "rounded",
     title = "replace",
