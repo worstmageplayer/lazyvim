@@ -136,6 +136,7 @@ map("n", "<leader>rw", function()
 
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_set_option_value("buftype", "prompt", { buf = buf, scope = "local" })
+  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
   vim.fn.prompt_setprompt(buf, "replace '" .. word .. "' with: ")
 
   local float_height = 1
