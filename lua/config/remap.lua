@@ -82,6 +82,7 @@ map("n", "K", function()
   local ok = pcall(function()
     vim.cmd("help " .. word)
   end)
+
   if not ok then
     vim.notify("No help found for: " .. word, vim.log.levels.WARN)
     return
