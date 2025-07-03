@@ -24,7 +24,10 @@ map("n", "<leader>", function()
 
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, results)
-  vim.api.nvim_set_option_value("buftype", "prompt", { buf = buf, scope = "local" })
+  vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf, scope = "local" })
+  vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
+  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
+
 
   local win = vim.api.nvim_open_win(buf, true, {
     title = "Leader Mappings",
@@ -38,11 +41,19 @@ map("n", "<leader>", function()
     style = "minimal",
   })
 
+  vim.keymap.set("n", "<leader>", "<nop>", { buffer = buf, nowait = true, silent = true })
   vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_win_close(win, true)
-    vim.api.nvim_buf_delete(buf, { force = true })
-  end, { silent = true, buffer = buf })
+  end, { buffer = buf, nowait = true, silent = true })
 
+  vim.api.nvim_create_autocmd("WinLeave", {
+    buffer = buf,
+    once = true,
+    callback = function ()
+      vim.api.nvim_win_close(win, true)
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
+  })
 end, opts("Show <leader> mappings"))
 
 -- Better help
@@ -68,6 +79,7 @@ map("n", "K", function()
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, help_lines)
   vim.api.nvim_set_option_value("filetype", "help", { buf = buf, scope = "local" })
   vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
+  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
 
   local width = math.floor(vim.o.columns * 0.6)
   local height = math.floor(vim.o.lines * 0.8)
