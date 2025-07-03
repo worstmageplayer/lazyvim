@@ -136,7 +136,7 @@ map("n", "K", function()
     end
   })
 
-end, opts("Floating help"))
+end, opts("Help"))
 
 -- Refactor
 map("n", "<leader>rs", function()
