@@ -199,7 +199,7 @@ map("n", "<leader>rw", function()
 
   vim.api.nvim_set_current_win(win)
   vim.cmd("startinsert")
-end, opts("replace word with floating input"))
+end, opts("Replace word"))
 
 -- File Explorer
 map("n", "<leader>q", vim.cmd.Ex, opts(":Ex"))
