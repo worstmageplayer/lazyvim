@@ -104,7 +104,7 @@ map("n", "K", function()
   local row = math.floor((vim.o.lines - height) / 2)
   local col = math.floor((vim.o.columns - width) / 2)
 
-  local float_win = vim.api.nvim_open_win(buf, true, {
+  local win = vim.api.nvim_open_win(buf, true, {
     relative = "editor",
     width = width,
     height = height,
@@ -116,17 +116,17 @@ map("n", "K", function()
     title_pos = "center",
   })
 
-  vim.api.nvim_win_set_cursor(float_win, cursor_pos)
+  vim.api.nvim_win_set_cursor(win, cursor_pos)
 
   vim.keymap.set("n", "<Esc>", function()
-    vim.api.nvim_win_close(float_win, true)
+    vim.api.nvim_win_close(win, true)
   end, { buffer = buf, nowait = true, silent = true })
 
   vim.api.nvim_create_autocmd("WinLeave", {
     buffer = buf,
     once = true,
     callback = function()
-      vim.api.nvim_win_close(float_win, true)
+      vim.api.nvim_win_close(win, true)
     end,
   })
 
