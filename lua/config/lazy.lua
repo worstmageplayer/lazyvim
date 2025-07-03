@@ -21,6 +21,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Set <leader> key
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- === UI Settings ===
 vim.opt.number = true
