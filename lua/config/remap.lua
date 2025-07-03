@@ -95,17 +95,17 @@ map("n", "K", function()
 
   vim.cmd("q")
 
-  local float_buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_lines(float_buf, 0, -1, false, help_lines)
-  vim.bo[float_buf].filetype = "help"
-  vim.bo[float_buf].modifiable = false
+  local buf = vim.api.nvim_create_buf(false, true)
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, help_lines)
+  vim.bo[buf].filetype = "help"
+  vim.bo[buf].modifiable = false
 
   local width = math.floor(vim.o.columns * 0.6)
   local height = math.floor(vim.o.lines * 0.8)
   local row = math.floor((vim.o.lines - height) / 2)
   local col = math.floor((vim.o.columns - width) / 2)
 
-  local float_win = vim.api.nvim_open_win(float_buf, true, {
+  local float_win = vim.api.nvim_open_win(buf, true, {
     relative = "editor",
     width = width,
     height = height,
@@ -121,10 +121,10 @@ map("n", "K", function()
 
   vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_win_close(float_win, true)
-  end, { buffer = float_buf, nowait = true, silent = true })
+  end, { buffer = buf, nowait = true, silent = true })
 
   vim.api.nvim_create_autocmd("WinLeave", {
-    buffer = float_buf,
+    buffer = buf,
     once = true,
     callback = function()
       if vim.api.nvim_win_is_valid(float_win) then
@@ -156,7 +156,7 @@ map("n", "<leader>rw", function()
 
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_set_option_value("buftype", "prompt", { buf = buf, scope = "local" })
-  vim.fn.prompt_setprompt(buf, "Replace '" .. word .. "' with: ")
+  vim.fn.prompt_setprompt(buf, "replace '" .. word .. "' with: ")
 
   local float_height = 1
   local float_width = 40
@@ -169,14 +169,14 @@ map("n", "<leader>rw", function()
     col = - math.floor(float_width / 2),
     style = "minimal",
     border = "rounded",
-    title = "Replace",
+    title = "replace",
     title_pos = "center",
     zindex = 150,
   })
 
   vim.api.nvim_set_current_win(target_win)
-  local pattern = "\\V\\<" .. word .. "\\>"
-  local match_id = vim.fn.matchadd("Search", pattern)
+  local pattern = "\\v\\<" .. word .. "\\>"
+  local match_id = vim.fn.matchadd("search", pattern)
 
   local function cleanup()
     vim.fn.prompt_setcallback(buf, function() end)
@@ -198,11 +198,11 @@ map("n", "<leader>rw", function()
     vim.cmd(cmd)
   end)
 
-  vim.keymap.set("n", "<Esc>", cleanup, { buffer = buf, silent = true })
+  vim.keymap.set("n", "<esc>", cleanup, { buffer = buf, silent = true })
 
   vim.api.nvim_set_current_win(win)
   vim.cmd("startinsert")
-end, opts("Replace word with floating input"))
+end, opts("replace word with floating input"))
 
 -- File Explorer
 map("n", "<leader>q", vim.cmd.Ex, opts(":Ex"))
