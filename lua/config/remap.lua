@@ -37,11 +37,11 @@ map("n", "<leader>", function()
   local maps = vim.api.nvim_get_keymap("")
   local results = {}
 
-  for _, map in ipairs(maps) do
-    if map.lhs:find("^" .. vim.g.mapleader) then
-      local desc = map.desc or ""
-      local lhs = map.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
-      table.insert(results, string.format("%-5s %-15s %s", map.mode, lhs, desc))
+  for _, keymap in ipairs(maps) do
+    if keymap.lhs:find("^" .. vim.g.mapleader) then
+      local desc = keymap.desc or ""
+      local lhs = keymap.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
+      table.insert(results, string.format("%-5s %-15s %s", keymap.mode, lhs, desc))
     end
   end
 
