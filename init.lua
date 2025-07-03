@@ -1,4 +1,5 @@
 require("config.lazy")
 require("config.remap")
 require("config.languageconfig")
-
+require("config.autocmds")
+require("config.commands")
