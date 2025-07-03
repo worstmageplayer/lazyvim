@@ -152,7 +152,6 @@ map("n", "<leader>rw", function()
     border = "rounded",
     title = "replace",
     title_pos = "center",
-    zindex = 150,
   })
 
   vim.api.nvim_set_current_win(target_win)
