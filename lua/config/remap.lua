@@ -120,19 +120,14 @@ map("n", "K", function()
 
   vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_win_close(win, true)
-    vim.api.nvim_buf_delete(buf, { force = true })
   end, { buffer = buf, nowait = true, silent = true })
 
   vim.api.nvim_create_autocmd("WinLeave", {
     buffer = buf,
     once = true,
     callback = function ()
-      if vim.api.nvim_win_is_valid(win) then
-        vim.api.nvim_win_close(win, true)
-      end
-      if vim.api.nvim_buf_is_valid(buf) then
-        vim.api.nvim_buf_delete(buf, { force = true })
-      end
+      vim.api.nvim_win_close(win, true)
+      vim.api.nvim_buf_delete(buf, { force = true })
     end
   })
 
