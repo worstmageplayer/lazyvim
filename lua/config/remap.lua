@@ -116,7 +116,7 @@ map("n", "K", function()
     title_pos = "center",
   })
 
-  vim.api.nvim_win_set_cursor(0, cursor_pos)
+  vim.api.nvim_win_set_cursor(float_win, cursor_pos)
 
   vim.keymap.set("n", "<Esc>", function()
     vim.api.nvim_win_close(float_win, true)
@@ -126,9 +126,7 @@ map("n", "K", function()
     buffer = buf,
     once = true,
     callback = function()
-      if vim.api.nvim_win_is_valid(float_win) then
-        vim.api.nvim_win_close(float_win, true)
-      end
+      vim.api.nvim_win_close(float_win, true)
     end,
   })
 
