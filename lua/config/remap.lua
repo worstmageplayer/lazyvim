@@ -155,30 +155,39 @@ map("n", "<leader>rw", function()
   })
 
   vim.api.nvim_set_current_win(target_win)
-  local pattern = "\\v\\<" .. word .. "\\>"
-  local match_id = vim.fn.matchadd("search", pattern)
+  local pattern = "\\<" .. word .. "\\>"
+  local match_id = vim.fn.matchadd("Search", pattern)
 
   local function cleanup()
     vim.fn.prompt_setcallback(buf, function() end)
-    vim.api.nvim_win_close(win, true)
-    vim.api.nvim_buf_delete(buf, { force = true })
-    vim.fn.matchdelete(match_id)
+
+    vim.fn.matchdelete(match_id, target_win)
+
+    if vim.api.nvim_win_is_valid(win) then
+      vim.api.nvim_win_close(win, true)
+    end
+
+    if vim.api.nvim_buf_is_valid(buf) then
+      vim.api.nvim_buf_delete(buf, { force = true })
+    end
   end
 
   vim.fn.prompt_setcallback(buf, function(replace)
     if not replace or replace == "" then
-      cleanup()
+      vim.api.nvim_win_close(win, true)
       return
     end
 
-    cleanup()
-    word = "\\<" .. word .. "\\>"
+    vim.api.nvim_win_close(win, true)
     replace = replace:gsub("/", "\\/")
-    local cmd = string.format("%%s/%s/%s/gc", word, replace)
+    local cmd = string.format("%%s/%s/%s/gc", pattern, replace)
     vim.cmd(cmd)
   end)
 
-  vim.keymap.set("n", "<esc>", cleanup, { buffer = buf, silent = true })
+  vim.keymap.set("n", "<esc>", function()
+    vim.api.nvim_win_close(win, true)
+  end, { buffer = buf, silent = true })
+
   vim.api.nvim_create_autocmd("WinLeave", {
     buffer = buf,
     once = true,
