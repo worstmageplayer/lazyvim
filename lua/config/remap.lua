@@ -34,10 +34,10 @@ local opts = function(desc) return { desc = desc, noremap = true, silent = true 
 
 -- <leader> mappings
 map("n", "<leader>", function()
-  local maps = vim.api.nvim_get_keymap("")
+  local keymaps = vim.api.nvim_get_keymap("")
   local results = {}
 
-  for _, keymap in ipairs(maps) do
+  for _, keymap in ipairs(keymaps) do
     if keymap.lhs:find("^" .. vim.g.mapleader) then
       local desc = keymap.desc or ""
       local lhs = keymap.lhs:gsub("^" .. vim.g.mapleader, "<leader>")
