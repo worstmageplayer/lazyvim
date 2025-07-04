@@ -2,6 +2,7 @@ return {
   'saghen/blink.cmp',
   version = '1.*',
   build = 'cargo build --release',
+  event = { 'BufReadPre', 'BufNewFile' },
 
   opts = {
     keymap = {
