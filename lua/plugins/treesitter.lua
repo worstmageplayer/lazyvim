@@ -18,6 +18,7 @@ return {
         "query",
         "markdown",
         "markdown_inline",
+        "rust",
       },
       sync_install = false,
       auto_install = false,
