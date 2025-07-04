@@ -28,7 +28,6 @@ map("n", "<leader>", function()
   vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
   vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
 
-
   local win = vim.api.nvim_open_win(buf, true, {
     title = "Leader Mappings",
     title_pos = "center",
