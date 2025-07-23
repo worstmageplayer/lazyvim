@@ -57,11 +57,56 @@ end, opts("Show <leader> mappings"))
 
 -- Better help
 map("n", "K", function()
+  local lsp_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf()})
   local word = vim.fn.expand("<cword>")
 
-  local ok = pcall(function()
-    vim.cmd("help " .. word)
-  end)
+  local function open_window(title, lines, cursor_pos)
+    local buf = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.api.nvim_set_option_value("filetype", "help", { buf = buf, scope = "local" })
+    vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf, scope = "local" })
+    vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
+    vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
+
+    local width = math.floor(vim.o.columns * 0.6)
+    local height = math.floor(vim.o.lines * 0.8)
+    local row = math.floor((vim.o.lines - height) / 2)
+    local col = math.floor((vim.o.columns - width) / 2)
+
+    local win = vim.api.nvim_open_win(buf, true, {
+      relative = "editor",
+      width = width,
+      height = height,
+      row = row,
+      col = col,
+      style = "minimal",
+      border = "rounded",
+      title = title,
+      title_pos = "center",
+    })
+
+    vim.api.nvim_win_set_cursor(win, cursor_pos)
+
+    vim.keymap.set("n", "<Esc>", function()
+      vim.api.nvim_win_close(win, true)
+    end, { buffer = buf, nowait = true, silent = true })
+
+    vim.api.nvim_create_autocmd("WinLeave", {
+      buffer = buf,
+      once = true,
+      callback = function ()
+        vim.api.nvim_win_close(win, true)
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
+    })
+  end
+
+  if #lsp_clients > 0 then
+    vim.lsp.buf.hover()
+    return
+  end
+
+  local ok = pcall(function() vim.cmd("help " .. word) end)
 
   if not ok then
     vim.notify("No help found for: " .. word, vim.log.levels.WARN)
@@ -74,44 +119,7 @@ map("n", "K", function()
 
   vim.cmd("q")
 
-  local buf = vim.api.nvim_create_buf(false, true)
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, help_lines)
-  vim.api.nvim_set_option_value("filetype", "help", { buf = buf, scope = "local" })
-  vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf, scope = "local" })
-  vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
-  vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
-
-  local width = math.floor(vim.o.columns * 0.6)
-  local height = math.floor(vim.o.lines * 0.8)
-  local row = math.floor((vim.o.lines - height) / 2)
-  local col = math.floor((vim.o.columns - width) / 2)
-
-  local win = vim.api.nvim_open_win(buf, true, {
-    relative = "editor",
-    width = width,
-    height = height,
-    row = row,
-    col = col,
-    style = "minimal",
-    border = "rounded",
-    title = "Help: " .. word,
-    title_pos = "center",
-  })
-
-  vim.api.nvim_win_set_cursor(win, cursor_pos)
-
-  vim.keymap.set("n", "<Esc>", function()
-    vim.api.nvim_win_close(win, true)
-  end, { buffer = buf, nowait = true, silent = true })
-
-  vim.api.nvim_create_autocmd("WinLeave", {
-    buffer = buf,
-    once = true,
-    callback = function ()
-      vim.api.nvim_win_close(win, true)
-      vim.api.nvim_buf_delete(buf, { force = true })
-    end
-  })
+  open_window("Help: " .. word, help_lines, cursor_pos)
 
 end, opts("Help"))
 
@@ -288,6 +296,3 @@ map('n', '<leader>ha', function() harpoon:list():add() end, opts("Harpoon add cu
 map('n', '<C-j>', function() harpoon:list():select(1) end, opts("Harpoon select 1"))
 map('n', '<C-k>', function() harpoon:list():select(2) end, opts("Harpoon select 2"))
 map('n', '<C-l>', function() harpoon:list():select(3) end, opts("Harpoon select 3"))
-map('n', '<C-J>', function() harpoon:list():select(4) end, opts("Harpoon select 4"))
-map('n', '<C-K>', function() harpoon:list():select(5) end, opts("Harpoon select 5"))
-map('n', '<C-L>', function() harpoon:list():select(6) end, opts("Harpoon select 6"))
