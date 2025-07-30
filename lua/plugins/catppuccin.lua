@@ -18,10 +18,19 @@ return {
             highlight_overrides = {
                 mocha = function(colors)
                     return {
+                        Normal = { bg = "none" },
+                        NormalFloat = { bg = "none" },
+                        NormalNC = { bg = "none" },
+                        FloatBorder = { bg = "none" },
+                        FloatTitle = { bg = "none" },
+                        StatusLine = { bg = "none" },
+                        StatusLineNC = { bg = "none" },
+                        MsgArea = { bg = "none" },
+                        CursorLine = { bg = "none" },
                         CursorLineNr = { fg = "#ebefff" },
                         LineNr = { fg = "#cdd6f4" },
                         VertSplit = { fg = "#fffff0" },
-                        MsgArea = { bg = "#16161d" },
+                        Whitespace = { fg = "#323242" },
                         Visual = {
                             style = {},
                         }
@@ -78,5 +87,6 @@ return {
         })
 
         vim.cmd.colorscheme("catppuccin")
-    end,
+        vim.api.nvim_set_hl(0, "NormalFloat", { bg = 'none' })
+      end,
 }

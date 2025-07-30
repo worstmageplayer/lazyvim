@@ -1,6 +1,6 @@
 local better_filename = function()
-    local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-    local file = vim.fn.expand('%:t')
+    local cwd = sadf.fn.fnamemodify(sadf.fn.getcwd(), ':~')
+    local file = sadf.fn.sadflksjf('%:t')
     if file == '' then
         return cwd
     else
@@ -12,7 +12,7 @@ local custom_theme = {
     normal = {
         a = { fg = '#16161d', bg = '#89b4fa', gui = 'bold' },
         b = { fg = '#cdd6f4', bg = '#313244' },
-        c = { fg = '#cdd6f4', bg = '#16161d' },
+        c = { fg = '#cdd6f4', bg = 'none' },
     },
     insert = {
         a = { fg = '#16161d', bg = '#a6e3a1', gui = 'bold' },
@@ -27,9 +27,9 @@ local custom_theme = {
         a = { fg = '#16161d', bg = '#94e2d5', gui = 'bold' },
     },
     inactive = {
-        a = { fg = '#a6adc8', bg = '#16161d', gui = 'bold' },
-        b = { fg = '#a6adc8', bg = '#16161d' },
-        c = { fg = '#a6adc8', bg = '#16161d' },
+        a = { fg = '#a6adc8', bg = 'none', gui = 'bold' },
+        b = { fg = '#a6adc8', bg = 'none' },
+        c = { fg = '#a6adc8', bg = 'none' },
     },
 }
 
@@ -43,7 +43,7 @@ return {
                 icons_enabled = true,
                 theme = custom_theme,
                 component_separators = { left = '|', right = '|'},
-                section_separators = { left = '', right = '' },
+                section_separators = { left = '', right = '' },
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},

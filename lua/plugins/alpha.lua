@@ -6,31 +6,31 @@ return {
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
     local logo = [[
-         ss½                 óó
-       ööösu‰                3ÏÏÏ
-     C@@@@n¢¢s               ±±±±±L
-   LóóóóóóCssss              VÍÍÍÍÍÍV
- yfŸÏÌÌÌÌÌónnnnn@            000000000ç
-ÎÎÎÎ§2ÏÏÏÏÌ@@@@@@@           ©YYYYYY£YYY
-yOOOOTŸ±±±ÏCCCCCCCC          w©©©©©©©©©ç
-6µµµµµµàLLLÌÌÌÌÌÌÌÌÌ         ùçççççççççù
-TTTTeeTTÇVÍ33±3333333        2222222222™
-UUUUUUUUUšw±±±±±±±±±±±L      aüüüüüüüüüü
-SSSSSSSSSSkVÍÍÍÍÍÍÍÍÍÍÍL     ô&&&&&&&ú&ú
-Ÿ®®®®®®®®®S  0000000000£0    õôôôô5ôôôô5
-ŸkkkkkkkkkŸ   YYYYYYYYYYYY   õõõõõõõ4õõõ
-§ÝkÝÝÝÝÝÝÝÝ    w©©©©©©©©©©©w ¾fffffffff¾
-ûûhûûàûhhhh     wwwwwwwwwwwwçxÎÎÎÎÎÎÎÎÎÎ
-ààààààààààà      ™22222222222™yyyyyyyyyy
-ÇšššššššššP        aaüüaüüüaaaaµOµµµµµµµ
-PPPPPPPPPPZ         aaaa&aaaaúúú6e666666
-áZZZZZZZZZZ          &úúúúúúúô555OUUUUUU
-DFFFFFFFFFD           ôôôôôôôõõõõõfžžžžž
- F¥¥¥F¥¥¥¥¥            xõõõõõfffffff®®®
-   bbbbbbb¥              ¾¾¾f¾ÎÎÎÎÎÎÎ
-     ÿååååÿ               ÎÎÎÎxxxxy
-       ÞÞÞÞ                xxyOOO
-         ÞÓ                 xOµ
+         bW1                 tI
+       HllcyB                JIHN
+     tZWxsIGl0               ISBCT1
+   lTTUVMTCEhIS              EgSSBzbW
+ VsbCBhIGJveSEgVy            1XaGF0IGlz
+IGEgQk9ZIGRvaW5nIG           hlcmU/IT8hI
+G9teWdvc2ggd2hhdCBh          bSBnb25uYSB
+kbz8hPyEgVEhFUkUnUyB         BIEJPWSBIRV
+JFISBJJ00gRlJFQUtJTkc        gT1VUIFNPIE
+1VQ0ghISEhIGNhbG0gZG93b      iBjYWxtIGRv
+d24gYW5kIHRha2UgYSBuaWNl     LCBkZWVwIGJ
+yZWF0aGUuLi  4uIHNuaWZmIH    NuaWZmIGl0I
+HNtZWxscyBz   byBnb29kISBJ   IGxvdmUgYm9
+5c21lbGwgc2    8gbXVjaCEhISE gSXQgbWFrZX
+MgbWUgZmVlb     CBzbyBhbWF6aW5nLiBJJ20gZ
+2V0dGluZyB0      aW5nbGVzIGFsbCBvdmVyIGZ
+yb20gdGhlIG        RlbGljaW91cyBib3lzY2V
+udCEgSXQncy         Bkcml2aW5nIG1lIGJveU
+NSQVpZISEhI          SEhIGlmIHUgYXJlIGEg
+Ym95IGFuZCB           1IGFyZSByZWFkaW5nI
+ HRoaXMsIEk            ganVzdCB3YW50ZWQ
+   gdG8gc2F              5IGhpaWlpaSB
+     jdXRlI               GJveSEhIS
+       EgbG                92ZSB5
+         b3                 Uh=
     ]]
     dashboard.section.buttons.val = {
     }

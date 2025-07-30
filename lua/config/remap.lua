@@ -3,7 +3,7 @@ local map = vim.keymap.set
 local opts = function(desc) return { desc = desc, noremap = true, silent = true } end
 
 -- <leader> mappings
-map("n", "<leader>", function()
+map("n", "<leader>?", function()
   local keymaps = vim.api.nvim_get_keymap("")
   local results = {}
 
@@ -56,71 +56,10 @@ map("n", "<leader>", function()
 end, opts("Show <leader> mappings"))
 
 -- Better help
-map("n", "K", function()
-  local lsp_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf()})
-  local word = vim.fn.expand("<cword>")
-
-  local function open_window(title, lines, cursor_pos)
-    local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-    vim.api.nvim_set_option_value("filetype", "help", { buf = buf, scope = "local" })
-    vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf, scope = "local" })
-    vim.api.nvim_set_option_value("modifiable", false, { buf = buf, scope = "local" })
-    vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf, scope = "local" })
-
-    local width = math.floor(vim.o.columns * 0.6)
-    local height = math.floor(vim.o.lines * 0.8)
-    local row = math.floor((vim.o.lines - height) / 2)
-    local col = math.floor((vim.o.columns - width) / 2)
-
-    local win = vim.api.nvim_open_win(buf, true, {
-      relative = "editor",
-      width = width,
-      height = height,
-      row = row,
-      col = col,
-      style = "minimal",
-      border = "rounded",
-      title = title,
-      title_pos = "center",
-    })
-
-    vim.api.nvim_win_set_cursor(win, cursor_pos)
-
-    vim.keymap.set("n", "<Esc>", function()
-      vim.api.nvim_win_close(win, true)
-    end, { buffer = buf, nowait = true, silent = true })
-
-    vim.api.nvim_create_autocmd("WinLeave", {
-      buffer = buf,
-      once = true,
-      callback = function ()
-        vim.api.nvim_win_close(win, true)
-        vim.api.nvim_buf_delete(buf, { force = true })
-      end
-    })
-  end
-
-  if #lsp_clients > 0 then
-    vim.lsp.buf.hover()
-    return
-  end
-
-  local ok = pcall(function() vim.cmd("help " .. word) end)
-
-  if not ok then
-    vim.notify("No help found for: " .. word, vim.log.levels.WARN)
-    return
-  end
-
-  local help_buf = vim.api.nvim_get_current_buf()
-  local help_lines = vim.api.nvim_buf_get_lines(help_buf, 0, -1, false)
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
-
-  vim.cmd("q")
-
-  open_window("Help: " .. word, help_lines, cursor_pos)
-
+map("n", "K", function ()
+  vim.lsp.buf.hover {
+    border = "single",
+  }
 end, opts("Help"))
 
 -- Refactor
@@ -136,6 +75,7 @@ map("n", "<leader>rs", function()
     end)
   end)
 end, opts("Replace search"))
+map("n", "<leader>rn", vim.lsp.buf.rename, opts("LSP rename"))
 map("n", "<leader>rw", function()
   local word = vim.fn.expand("<cword>")
   if not word or word == "" then return end
@@ -219,6 +159,9 @@ map('n', '<A-]>', [[?\v\{<CR>zz]], opts("Search prev '{' and centers"))
 -- Scroll half-page and center the cursor
 map('n', '<C-u>', [[<C-u><CR>zz]], opts(""))
 map('n', '<C-d>', [[<C-d><CR>zz]], opts(""))
+
+map('n', 'j', [[gj]], opts(""))
+map('n', 'k', [[gk]], opts(""))
 
 -- Next/prev search result and center + open folds
 map('n', 'n', [[nzzzv]], opts(""))

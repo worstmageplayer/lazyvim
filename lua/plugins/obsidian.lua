@@ -10,6 +10,10 @@ return {
                 name = "obsidian_vault",
                 path = "~/Personal/obsidian_vault",
             },
+            {
+                name = "uni_notes",
+                path = "~/Personal/uni_notes",
+            },
         },
     },
 }

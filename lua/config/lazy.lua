@@ -48,7 +48,6 @@ vim.opt.listchars = {
   precedes = "←",
 }
 
-
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
