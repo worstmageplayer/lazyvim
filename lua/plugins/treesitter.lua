@@ -6,7 +6,6 @@ return {
     require('nvim-treesitter.install').compilers = { 'zig' }
     require('nvim-treesitter.configs').setup {
       ensure_installed = {
-        "java",
         "javascript",
         "typescript",
         "c",
@@ -17,10 +16,13 @@ return {
         "vim",
         "vimdoc",
         "query",
+        "matlab",
         "markdown",
         "markdown_inline",
         "rust",
         "xml",
+        "asm",
+        "llvm",
       },
       sync_install = false,
       auto_install = false,

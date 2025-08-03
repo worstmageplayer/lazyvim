@@ -17,8 +17,5 @@ return {
       topdelete = { text = "" },
       changedelete = { text = "▎" },
     },
-    on_attach = function(buffer)
-      local gs = package.loaded.gitsigns
-    end,
   },
 }

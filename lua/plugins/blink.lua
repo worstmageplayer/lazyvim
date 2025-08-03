@@ -10,12 +10,10 @@ return {
       ['<C-e>'] = { 'hide' },
       ['<C-y>'] = { 'select_and_accept' },
       ['<CR>'] = { 'accept', 'fallback' },
+      ['<Tab>'] = { 'accept', 'fallback' },
 
       ['<Up>'] = { 'select_prev', 'fallback' },
       ['<Down>'] = { 'select_next', 'fallback' },
-
-      ['<S-Tab>'] = { 'select_prev', 'fallback' },
-      ['<Tab>'] = { 'select_next', 'fallback' },
 
       ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
       ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
