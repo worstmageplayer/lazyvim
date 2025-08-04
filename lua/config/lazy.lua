@@ -32,6 +32,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.showtabline = 0
 vim.opt.cursorline = true
+vim.opt.winborder = "rounded"
 
 -- === Tabs & Indentation ===
 vim.opt.signcolumn = 'yes'
@@ -55,7 +56,7 @@ require("lazy").setup({
     { import = "plugins" },
   },
   -- automatically check for plugin updates
-  checker = { enabled = true },
+  checker = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {
