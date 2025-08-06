@@ -182,6 +182,8 @@ map('n', '<leader>y', '"+y', opts("Yank to System Clipboard"))
 map('v', '<leader>y', '"+y', opts("Yank to System Clipboard"))
 map("n", "<leader>p", '"+p', opts("Paste from System Clipboard"))
 map("n", "<leader>P", '"+P', opts("Paste from System Clipboard"))
+map("v", "<leader>p", '"+p', opts("Paste from System Clipboard"))
+map("v", "<leader>P", '"+P', opts("Paste from System Clipboard"))
 
 -- Disable accidental Q (Ex mode)
 map('n', 'Q', "<nop>", opts(""))
