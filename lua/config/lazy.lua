@@ -31,7 +31,6 @@ vim.opt.wrap = false
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.showtabline = 0
-vim.opt.cursorline = true
 vim.opt.winborder = "rounded"
 
 -- === Tabs & Indentation ===

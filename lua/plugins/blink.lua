@@ -29,6 +29,9 @@ return {
     },
 
     completion = {
+      menu = {
+        border = "none",
+      },
       documentation = { auto_show = false },
     },
 

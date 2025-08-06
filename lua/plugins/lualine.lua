@@ -1,6 +1,6 @@
 local better_filename = function()
     local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':~')
-    local file = vim.fn.sadflksjf('%:t')
+    local file = vim.fn.expand('%:t')
     if file == '' then
         return cwd
     else

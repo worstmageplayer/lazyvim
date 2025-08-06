@@ -20,7 +20,7 @@ map("n", "<leader>?", function()
   end)
 
   local width = math.max(unpack(vim.tbl_map(function(line) return #line end, results))) + 4
-  local height = #results
+  local height = math.min(#results, 30)
 
   local buf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, results)
@@ -219,23 +219,4 @@ map("v", "<leader>\'", "<Esc> `>a\'<Esc> `<i\'<Esc>", opts("Surround selection i
 map("v", "<leader>(", "<Esc> `>a)<Esc> `<i(<Esc>", opts("Surround selection in parenthesis"))
 map("v", "<leader>{", "<Esc> `>a}<Esc> `<i{<Esc>", opts("Surround selection in curly braces"))
 map("v", "<leader>[", "<Esc> `>a]<Esc> `<i[<Esc>", opts("Surround selection in square brackets"))
-
--- === Telescope ===
-local builtin = require('telescope.builtin')
-map('n', '<leader>f', builtin.find_files, opts("Telescope find files"))
-map('n', '<leader>fl', builtin.find_files, opts("Telescope find files"))
-map('n', '<leader>fd', builtin.diagnostics, opts("Telescope diagnostics"))
-map('n', '<leader>fg', builtin.git_files, opts("Telescope git files"))
-map('n', '<leader>fs', builtin.live_grep, opts("Telescope grep string"))
-map('n', '<leader>fc', function()
-  builtin.find_files{ cwd = vim.fn.stdpath("config")}
-end, opts("Telescope find config files"))
-
--- === Harpoon2 ===
-local harpoon = require('harpoon')
-map('n', '<leader>h', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts("Harpoon quick menu"))
-map('n', '<leader>hl', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts("Harpoon quick menu"))
-map('n', '<leader>ha', function() harpoon:list():add() end, opts("Harpoon add current file"))
-map('n', '<C-j>', function() harpoon:list():select(1) end, opts("Harpoon select 1"))
-map('n', '<C-k>', function() harpoon:list():select(2) end, opts("Harpoon select 2"))
-map('n', '<C-l>', function() harpoon:list():select(3) end, opts("Harpoon select 3"))
+map("v", "<leader><", "<Esc> `>a><Esc> `<i<<Esc>", opts("Surround selection in angle brackets"))
