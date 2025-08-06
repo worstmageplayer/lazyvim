@@ -147,7 +147,7 @@ map("n", "<leader>rw", function()
 end, opts("Replace word"))
 
 -- File Explorer
-map("n", "<leader>q", vim.cmd.Ex, opts(":Ex"))
+map("n", "<leader>q", '<cmd>Oil<CR>', opts(":Ex"))
 
 -- Write and quit
 map("n", "<leader>wq", '<cmd>wq<CR>', opts("Write and Quit"))
